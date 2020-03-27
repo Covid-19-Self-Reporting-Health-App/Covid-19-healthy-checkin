@@ -9,8 +9,7 @@ import {
 } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import * as WebBrowser from 'expo-web-browser'
-import { VictoryBar, VictoryChart, VictoryTheme } from 'victory-native'
-
+import RadarGraph from '../components/RadarGraph'
 import { MonoText } from '../components/StyledText'
 
 export default function HomeScreen() {
@@ -27,16 +26,14 @@ export default function HomeScreen() {
                 contentContainerStyle={styles.contentContainer}
             >
                 <View style={styles.welcomeContainer}>
-                    <VictoryChart width={350} theme={VictoryTheme.material}>
-                        <VictoryBar data={data} x="quarter" y="earnings" />
-                    </VictoryChart>
+                    <RadarGraph />
                 </View>
 
                 <View style={styles.getStartedContainer}>
                     <DevelopmentModeNotice />
 
                     <Text style={styles.getStartedText}>
-                        Open up the code for screen:
+                        Open up the code for
                     </Text>
 
                     <View
