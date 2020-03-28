@@ -1,24 +1,13 @@
 import * as React from 'react'
-import {
-    Image,
-    Platform,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
-} from 'react-native'
+import { Platform, StyleSheet, TouchableOpacity, View } from 'react-native'
+import { H1, Text } from 'native-base'
 import { ScrollView } from 'react-native-gesture-handler'
 import * as WebBrowser from 'expo-web-browser'
 import RadarGraph from '../components/RadarGraph'
-import { MonoText } from '../components/StyledText'
 
 export default function HomeScreen() {
-    const data = [
-        { quarter: 1, earnings: 13000 },
-        { quarter: 2, earnings: 16500 },
-        { quarter: 3, earnings: 14250 },
-        { quarter: 4, earnings: 19000 },
-    ]
+    // const [todaysArticle, setTodaysArticle] = useSelector(state=>state.todaysArticle)
+    const todaysArticle = 'https://www.cdc.gov/coronavirus/2019-ncov/index.html'
     return (
         <View style={styles.container}>
             <ScrollView
@@ -26,59 +15,39 @@ export default function HomeScreen() {
                 contentContainerStyle={styles.contentContainer}
             >
                 <View style={styles.welcomeContainer}>
+                    <H1 style={styles.text}>YOUR HEALTH STATUS</H1>
                     <RadarGraph />
                 </View>
 
                 <View style={styles.getStartedContainer}>
-                    <DevelopmentModeNotice />
-
-                    <Text style={styles.getStartedText}>
-                        Open up the code for
+                    <Text style={styles.text}>Today : Yellow</Text>
+                    <Text style={styles.text}>Average : Orange</Text>
+                    <Text style={styles.text}> </Text>
+                    <Text style={styles.text}>
+                        Do some pushups right now. 19 of them.
                     </Text>
-
-                    <View
-                        style={[
-                            styles.codeHighlightContainer,
-                            styles.homeScreenFilename,
-                        ]}
-                    >
-                        <MonoText>screens/HomeScreen.js</MonoText>
-                    </View>
-
-                    <Text style={styles.getStartedText}>
-                        Change any of the text, save the file, and your app will
-                        automatically reload.
+                    <Text style={styles.text}>Did you do them? Y N</Text>
+                    <Text style={styles.text}>
+                        doing them and responding yes
+                    </Text>
+                    <Text style={styles.text}>
+                        will bump your physical score
                     </Text>
                 </View>
 
                 <View style={styles.helpContainer}>
                     <TouchableOpacity
-                        onPress={handleHelpPress}
+                        onPress={() => {
+                            WebBrowser.openBrowserAsync(todaysArticle)
+                        }}
                         style={styles.helpLink}
                     >
                         <Text style={styles.helpLinkText}>
-                            Help, it didn’t automatically reload!
+                            Click here for today's Daily Article
                         </Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>
-
-            <View style={styles.tabBarInfoContainer}>
-                <Text style={styles.tabBarInfoText}>
-                    This is a tab bar. You can edit it in:
-                </Text>
-
-                <View
-                    style={[
-                        styles.codeHighlightContainer,
-                        styles.navigationFilename,
-                    ]}
-                >
-                    <MonoText style={styles.codeHighlightText}>
-                        navigation/BottomTabNavigator.js
-                    </MonoText>
-                </View>
-            </View>
         </View>
     )
 }
@@ -87,37 +56,7 @@ HomeScreen.navigationOptions = {
     header: null,
 }
 
-function DevelopmentModeNotice() {
-    if (__DEV__) {
-        const learnMoreButton = (
-            <Text onPress={handleLearnMorePress} style={styles.helpLinkText}>
-                Learn more
-            </Text>
-        )
-
-        return (
-            <Text style={styles.developmentModeText}>
-                Development mode is enabled: your app will be slower but you can
-                use useful development tools. {learnMoreButton}
-            </Text>
-        )
-    } else {
-        return (
-            <Text style={styles.developmentModeText}>
-                You are not in development mode: your app will run at full
-                speed.
-            </Text>
-        )
-    }
-}
-
-function handleLearnMorePress() {
-    WebBrowser.openBrowserAsync(
-        'https://docs.expo.io/versions/latest/workflow/development-mode/'
-    )
-}
-
-function handleHelpPress() {
+function handleLinkPress() {
     WebBrowser.openBrowserAsync(
         'https://docs.expo.io/versions/latest/get-started/create-a-new-app/#making-your-first-change'
     )
@@ -126,14 +65,10 @@ function handleHelpPress() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#141414',
     },
-    developmentModeText: {
-        marginBottom: 20,
-        color: 'rgba(0,0,0,0.4)',
-        fontSize: 14,
-        lineHeight: 19,
-        textAlign: 'center',
+    text: {
+        color: '#fff',
     },
     contentContainer: {
         paddingTop: 30,
@@ -141,7 +76,6 @@ const styles = StyleSheet.create({
     welcomeContainer: {
         alignItems: 'center',
         marginTop: 10,
-        marginBottom: 20,
     },
     welcomeImage: {
         width: 100,
@@ -152,7 +86,6 @@ const styles = StyleSheet.create({
     },
     getStartedContainer: {
         alignItems: 'center',
-        marginHorizontal: 50,
     },
     homeScreenFilename: {
         marginVertical: 7,
@@ -195,9 +128,6 @@ const styles = StyleSheet.create({
         fontSize: 17,
         color: 'rgba(96,100,109, 1)',
         textAlign: 'center',
-    },
-    navigationFilename: {
-        marginTop: 5,
     },
     helpContainer: {
         marginTop: 15,
