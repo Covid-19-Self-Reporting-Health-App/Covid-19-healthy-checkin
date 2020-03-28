@@ -9,18 +9,22 @@ import {
     VictoryLabel,
 } from 'victory-native'
 
-const characterData = [
-    { social: 8, informational: 10, physical: 4, mental: 7 },
+const healthData = [
+    { social: 0, informational: 0, physical: 0, mental: 0 },
+    { social: 0, informational: 0, physical: 0, mental: 0 },
+]
+
+const healthData2 = [
+    { social: 10, informational: 10, physical: 10, mental: 7 },
     { social: 4, informational: 6, physical: 7, mental: 5 },
-    { social: 3, informational: 8, physical: 6, mental: 1 },
 ]
 
 class RadarGraph extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            data: this.processData(characterData),
-            maxima: this.getMaxima(characterData),
+            data: this.processData(healthData2),
+            maxima: this.getMaxima(healthData2),
         }
     }
 
@@ -51,9 +55,13 @@ class RadarGraph extends React.Component {
                 polar
                 theme={VictoryTheme.material}
                 domain={{ y: [0, 1] }}
+                animate={{
+                    duration: 5000,
+                    easing: 'quadInOut',
+                }}
             >
                 <VictoryGroup
-                    colorScale={['gold', 'orange', 'tomato']}
+                    colorScale={['gold', 'orange']}
                     style={{ data: { fillOpacity: 0.2, strokeWidth: 2 } }}
                 >
                     {this.state.data.map((data, i) => {
@@ -75,7 +83,10 @@ class RadarGraph extends React.Component {
                                 },
                             }}
                             tickLabelComponent={
-                                <VictoryLabel labelPlacement="vertical" />
+                                <VictoryLabel
+                                    labelPlacement="vertical"
+                                    dx={i == 0 ? -10 : i === 2 ? 10 : 0}
+                                />
                             }
                             labelPlacement="perpendicular"
                             axisValue={i + 1}
