@@ -3,6 +3,7 @@ import { AsyncStorage } from 'react-native'
 
 const SET_DATA = 'SET_DATA'
 const ASKey = 'Covid19HealthCheckin'
+const SET_ANS = 'SET_ANS'
 
 // initial state
 const blankData = {
@@ -25,6 +26,13 @@ const blankData = {
 
 // action creators
 export const setData = data => ({ type: SET_DATA, data })
+export const setAns = sliderId => ({ type: SET_ANS, sliderId })
+
+export const ChangeSlider = sliderId => {
+    return dispatch => {
+        dispatch(setAns(!sliderId))
+    }
+}
 
 export const editData = data => {
     return async dispatch => {
@@ -65,6 +73,8 @@ export default function(state = blankData, action) {
     switch (action.type) {
         case SET_DATA:
             return action.data
+        case SET_ANS:
+            return action.sliderId
         default:
             return state
     }

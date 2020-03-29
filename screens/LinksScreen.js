@@ -1,9 +1,11 @@
 /* eslint-disable react/no-array-index-key */
 //import * as React from 'react';
-import React, { Component } from 'react'
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
+import { setAns } from '../store/userdata'
 // import { StyleSheet, Text, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons'
+// import { Ionicons } from '@expo/vector-icons'
 // import * as WebBrowser from 'expo-web-browser';
 // import { RectButton, ScrollView } from 'react-native-gesture-handler';
 
@@ -16,71 +18,95 @@ import {
     Text,
     Body,
     Button,
+    Switch,
+    Left,
+    Right,
 } from 'native-base'
 
-const data = [
+const dataOld = [
     {
         question:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
+        answer: 'false',
     },
     {
         question:
             'Ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
+        answer: 'false',
     },
     {
         question:
             'Dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
+        answer: 'false',
     },
     {
         question:
             'Sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
+        answer: 'false',
     },
     {
         question:
             'Amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
+        answer: 'false',
     },
     {
         question:
             'Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
+        answer: 'false',
     },
     {
         question:
             'Adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
+        answer: 'false',
     },
 ]
 
-export default class CardItemBordered extends Component {
-    render() {
-        return (
-            <Container>
-                <Header />
-                <Content padder>
-                    <Card>
-                        <CardItem header bordered>
-                            <Text>NativeBase</Text>
-                        </CardItem>
-                        {data.map((entry, idx) => {
-                            return (
-                                <React.Fragment key={`data-${idx}`}>
-                                    <CardItem bordered>
-                                        <Body>
-                                            <Text>{entry.question}</Text>
-                                            <Button>
-                                                <Text>Chk</Text>
-                                            </Button>
-                                        </Body>
-                                    </CardItem>
-                                </React.Fragment>
-                            )
-                        })}
-                        <CardItem footer bordered>
-                            <Text>GeekyAnts</Text>
-                        </CardItem>
-                    </Card>
-                </Content>
-            </Container>
-        )
-    }
+export default function QuestionScreen() {
+    const data = useSelector(state => state.questions)
+    const dispatch = useDispatch()
+    return (
+        <Container>
+            <Header />
+            <Content padder>
+                <Card>
+                    <CardItem header bordered>
+                        <Left />
+                        <Text>Daily Questions</Text>
+                        <Right />
+                    </CardItem>
+                    {data.map((entry, idx) => {
+                        return (
+                            <React.Fragment key={`data-${idx}`}>
+                                {console.log(entry)}
+                                <CardItem bordered>
+                                    <Left>
+                                        <Text>{entry.question}</Text>
+                                    </Left>
+                                    <Right>
+                                        <Switch
+                                            value={entry.answer}
+                                            onChange={() =>
+                                                dispatch(setAns(idx))
+                                            }
+                                        />
+                                    </Right>
+                                </CardItem>
+                            </React.Fragment>
+                        )
+                    })}
+                    <CardItem footer bordered>
+                        <Left />
+                        <Body>
+                            <Button>
+                                <Text>Submit</Text>
+                            </Button>
+                        </Body>
+                        <Right />
+                    </CardItem>
+                </Card>
+            </Content>
+        </Container>
+    )
 }
 
 // export default function LinksScreen() {
