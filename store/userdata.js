@@ -3,6 +3,7 @@ import { AsyncStorage } from 'react-native'
 
 const SET_DATA = 'SET_DATA'
 const ASKey = 'Covid19HealthCheckin'
+const SET_ANS = 'SET_ANS'
 
 // initial state
 const blankData = {
