@@ -77,7 +77,6 @@ export default function QuestionScreen() {
                     {data.map((entry, idx) => {
                         return (
                             <React.Fragment key={`data-${idx}`}>
-                                {console.log(entry)}
                                 <CardItem bordered>
                                     <Left>
                                         <Text>{entry.question}</Text>
