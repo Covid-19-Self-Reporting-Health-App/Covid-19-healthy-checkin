@@ -15,6 +15,7 @@ import {
     CardItem,
     Text,
     Body,
+    Button,
 } from 'native-base'
 
 const data = [
@@ -58,23 +59,15 @@ export default class CardItemBordered extends Component {
                         <CardItem header bordered>
                             <Text>NativeBase</Text>
                         </CardItem>
-                        <CardItem bordered>
-                            <Body>
-                                <Text style={{ color: 'blue' }}>
-                                    NativeBase is a free and open source
-                                    framework that enable developers to build
-                                    high-quality mobile apps using React Native
-                                    iOS and Android apps with a fusion of ES6.
-                                </Text>
-                            </Body>
-                        </CardItem>
-
                         {data.map((entry, idx) => {
                             return (
                                 <React.Fragment key={`data-${idx}`}>
                                     <CardItem bordered>
                                         <Body>
                                             <Text>{entry.question}</Text>
+                                            <Button>
+                                                <Text>Chk</Text>
+                                            </Button>
                                         </Body>
                                     </CardItem>
                                 </React.Fragment>
