@@ -1,13 +1,30 @@
+// resources
 import * as React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import * as WebBrowser from 'expo-web-browser'
+
+// styling
 import { Platform, StyleSheet, TouchableOpacity, View } from 'react-native'
 import { H1, Text } from 'native-base'
 import { ScrollView } from 'react-native-gesture-handler'
-import * as WebBrowser from 'expo-web-browser'
+
+// components
 import RadarGraph from '../components/RadarGraph'
 
+// redux
+import { getData } from '../store/userdata'
+import { getArticle } from '../store/article'
+
 export default function HomeScreen() {
-    // const [todaysArticle, setTodaysArticle] = useSelector(state=>state.todaysArticle)
-    const todaysArticle = 'https://www.cdc.gov/coronavirus/2019-ncov/index.html'
+    // todaysArticle = 'https://www.cdc.gov/coronavirus/2019-ncov/index.html' by default
+    const todaysArticle = useSelector(state => state.todaysArticle)
+    const data = useSelector(state => state.userData)
+    const dispatch = useDispatch()
+
+    React.useEffect(() => {
+        // dispatch(getData())
+        dispatch(getArticle())
+    }, [])
     return (
         <View style={styles.container}>
             <ScrollView
@@ -38,12 +55,18 @@ export default function HomeScreen() {
                 <View style={styles.helpContainer}>
                     <TouchableOpacity
                         onPress={() => {
-                            WebBrowser.openBrowserAsync(todaysArticle)
+                            if (todaysArticle.loaded) {
+                                WebBrowser.openBrowserAsync(todaysArticle.url)
+                            }
                         }}
                         style={styles.helpLink}
                     >
                         <Text style={styles.helpLinkText}>
-                            Click here for today's Daily Article
+                            {!todaysArticle.loaded
+                                ? 'Loading Article...'
+                                : todaysArticle.messageType === 'default'
+                                ? 'CDC Main Website'
+                                : `Click here for today's daily ${todaysArticle.messageType}`}
                         </Text>
                     </TouchableOpacity>
                 </View>
@@ -54,12 +77,6 @@ export default function HomeScreen() {
 
 HomeScreen.navigationOptions = {
     header: null,
-}
-
-function handleLinkPress() {
-    WebBrowser.openBrowserAsync(
-        'https://docs.expo.io/versions/latest/get-started/create-a-new-app/#making-your-first-change'
-    )
 }
 
 const styles = StyleSheet.create({
