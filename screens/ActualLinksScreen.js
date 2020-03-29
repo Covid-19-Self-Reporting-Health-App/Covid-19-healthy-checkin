@@ -74,10 +74,11 @@ export default function ActualLinksScreen() {
                             flexWrap: 'wrap',
                         }}
                     >
-                        {helpfulArticles.map(art => (
+                        {helpfulArticles.map((art, idx) => (
                             <Button
                                 style={{ margin: '1%', width: '48%' }}
                                 light
+                                key={idx}
                                 onPress={() =>
                                     WebBrowser.openBrowserAsync(art.url)
                                 }
@@ -97,10 +98,11 @@ export default function ActualLinksScreen() {
                         onPress={() => WebBrowser.openBrowserAsync(art.url)}
                     >
                         <Text>Featured Archive</Text>
-                        {olderArticles.map(art => (
+                        {olderArticles.map((art, idx) => (
                             <Button
                                 style={{ margin: '1%', width: '98%' }}
                                 light
+                                key={idx}
                                 onPress={() =>
                                     WebBrowser.openBrowserAsync(art.url)
                                 }
