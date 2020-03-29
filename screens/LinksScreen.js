@@ -3,7 +3,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { setAns } from '../store/userdata'
+import { setAns } from '../store/questions'
 // import { StyleSheet, Text, View } from 'react-native';
 // import { Ionicons } from '@expo/vector-icons'
 // import * as WebBrowser from 'expo-web-browser';
