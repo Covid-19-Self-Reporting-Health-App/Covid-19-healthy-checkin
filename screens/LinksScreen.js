@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 //import * as React from 'react';
 import React, { Component } from 'react'
 
@@ -16,6 +17,37 @@ import {
     Body,
 } from 'native-base'
 
+const data = [
+    {
+        question:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
+    },
+    {
+        question:
+            'Ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
+    },
+    {
+        question:
+            'Dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
+    },
+    {
+        question:
+            'Sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
+    },
+    {
+        question:
+            'Amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
+    },
+    {
+        question:
+            'Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
+    },
+    {
+        question:
+            'Adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
+    },
+]
+
 export default class CardItemBordered extends Component {
     render() {
         return (
@@ -28,7 +60,7 @@ export default class CardItemBordered extends Component {
                         </CardItem>
                         <CardItem bordered>
                             <Body>
-                                <Text>
+                                <Text style={{ color: 'blue' }}>
                                     NativeBase is a free and open source
                                     framework that enable developers to build
                                     high-quality mobile apps using React Native
@@ -36,6 +68,18 @@ export default class CardItemBordered extends Component {
                                 </Text>
                             </Body>
                         </CardItem>
+
+                        {data.map((entry, idx) => {
+                            return (
+                                <React.Fragment key={`data-${idx}`}>
+                                    <CardItem bordered>
+                                        <Body>
+                                            <Text>{entry.question}</Text>
+                                        </Body>
+                                    </CardItem>
+                                </React.Fragment>
+                            )
+                        })}
                         <CardItem footer bordered>
                             <Text>GeekyAnts</Text>
                         </CardItem>
