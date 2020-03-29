@@ -49,8 +49,11 @@ export const editData = data => {
 export const getData = () => {
     return async dispatch => {
         try {
-            const { StorageData } = await AsyncStorage.getItem(ASKey)
-
+            let { StorageData } = await AsyncStorage.getItem(ASKey)
+            if (!StorageData) {
+                const Obj = await AsyncStorage.setItem(ASKey, StorageData)
+                StorageData = Obj.data
+            }
             dispatch(setData(JSON.parse(StorageData)))
         } catch (err) {
             console.error(err)
