@@ -62,7 +62,7 @@ export default function App(props) {
                     >
                         <Stack.Navigator>
                             <Stack.Screen
-                                name="Root"
+                                name="Helpful Links"
                                 component={BottomTabNavigator}
                             />
                         </Stack.Navigator>

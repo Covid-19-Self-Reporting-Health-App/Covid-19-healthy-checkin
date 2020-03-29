@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import TabBarIcon from '../components/TabBarIcon'
 import HomeScreen from '../screens/HomeScreen'
 import LinksScreen from '../screens/LinksScreen'
+import ActualLinksScreen from '../screens/ActualLinksScreen.js'
 
 const BottomTab = createBottomTabNavigator()
 const INITIAL_ROUTE_NAME = 'Home'
@@ -29,9 +30,19 @@ export default function BottomTabNavigator({ navigation, route }) {
                 name="Links"
                 component={LinksScreen}
                 options={{
-                    title: 'Resources',
+                    title: 'Daily Questions',
                     tabBarIcon: ({ focused }) => (
                         <TabBarIcon focused={focused} name="md-book" />
+                    ),
+                }}
+            />
+            <BottomTab.Screen
+                name="ActualLinks"
+                component={ActualLinksScreen}
+                options={{
+                    title: 'Links',
+                    tabBarIcon: ({ focused }) => (
+                        <TabBarIcon focused={focused} name="md-link" />
                     ),
                 }}
             />
