@@ -23,44 +23,6 @@ import {
     Right,
 } from 'native-base'
 
-const dataOld = [
-    {
-        question:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
-        answer: 'false',
-    },
-    {
-        question:
-            'Ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
-        answer: 'false',
-    },
-    {
-        question:
-            'Dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
-        answer: 'false',
-    },
-    {
-        question:
-            'Sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
-        answer: 'false',
-    },
-    {
-        question:
-            'Amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
-        answer: 'false',
-    },
-    {
-        question:
-            'Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
-        answer: 'false',
-    },
-    {
-        question:
-            'Adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
-        answer: 'false',
-    },
-]
-
 export default function QuestionScreen() {
     const data = useSelector(state => state.questions)
     const dispatch = useDispatch()

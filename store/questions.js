@@ -1,55 +1,38 @@
-const initialState = [
-    {
-        question:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
-        answer: false,
-        type: 'social',
-        weight: 2,
-    },
-    {
-        question:
-            'Ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
-        answer: false,
-        type: 'social',
-        weight: 2,
-    },
-    {
-        question:
-            'Dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
-        answer: false,
-        type: 'physical',
-        weight: 2,
-    },
-    {
-        question:
-            'Sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
-        answer: false,
-        type: 'physical',
-        weight: 2,
-    },
-    {
-        question:
-            'Amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
-        answer: false,
-        type: 'mental',
-        weight: 2,
-    },
-    {
-        question:
-            'Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
-        answer: false,
-        type: 'mental',
-        weight: 2,
-    },
-    {
-        question:
-            'Adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?',
-        answer: false,
-        type: 'informational',
-        weight: 2,
-    },
-]
+import questionsList from '../constants/questionsList'
 
+function generateDailyQuestions(questionsList) {
+    // from each category choose 2-3 questions and copy into format shown below
+    // {
+    //     question: 'question prompt',
+    //     answer: boolean,
+    //     type: 'social' 'mental' or 'physical',
+    //     weight: number from 1 to 10,
+    // }
+    const dailyQuestions = []
+    const categories = ['social', 'mental', 'physical']
+    for (const category in categories) {
+        const range = questionsList[category].length
+        const first = Math.floor(Math.random() * range)
+        let second = Math.floor(Math.random() * range)
+        while (first === second && range > 1) {
+            second = Math.floor(Math.random() * range)
+        }
+        dailyQuestions.push({
+            question: first.prompt,
+            answer: false,
+            type: category,
+            weight: first.weight,
+        })
+        dailyQuestions.push({
+            question: second.prompt,
+            answer: false,
+            type: category,
+            weight: second.weight,
+        })
+    }
+    return dailyQuestions
+}
+const initialState = []
 const SET_ANS = 'SET_ANS'
 
 export const setAns = sliderId => ({ type: SET_ANS, sliderId })

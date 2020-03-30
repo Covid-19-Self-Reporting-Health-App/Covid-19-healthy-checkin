@@ -11,7 +11,7 @@ const questions = {
         },
         {
             prompt:
-                'Reach out into your community, find ways to volunteer, whether online or in person.',
+                'Reach out into your community, find ways to volunteer, whether remotely or in person.',
             weight: 2,
         },
         {
@@ -89,7 +89,7 @@ const questions = {
         },
         {
             prompt:
-                'Stay up to date on evolving treatments and what to do if you get sick.',
+                'Stay up to date on evolving treatments and what to do if you get sick. See the links page for information.',
             weight: 2,
         },
     ],
